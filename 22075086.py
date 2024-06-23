@@ -36,7 +36,7 @@ fig.subplots_adjust(
     right=0.90,  # Padding from the right edge of the figure
     top=0.85,  # Padding from the top edge of the figure (adjusted to leave space for the title)
     bottom=0.05,  # Padding from the bottom edge of the figure
-    wspace=0.01,  # Width padding between subplots
+    wspace=0.05,  # Width padding between subplots
     hspace=0.01,  # Height padding between subplots
 )
 grid_spec = fig.add_gridspec(nrows=4, ncols=2)
@@ -55,38 +55,37 @@ plt.text(0.001, 0.3, "Name: Md Nadimozzaman Pappo", fontsize=30, color="#333333"
 plt.text(0.8, 0.3, "Student ID: 22075086", fontsize=30, color="#333333")
 plt.axis("off")
 
-plt.show()
 
-# 1. plot rain vs temp scatter plot
-
+# Plot 1: Rain vs Temp Scatter Plot
 ax4 = fig.add_subplot(grid_spec[1, 0])
 # Normalize the data for better color scaling
 df["temp_norm"] = (df["tem"] - df["tem"].min()) / (df["tem"].max() - df["tem"].min())
 df["rain_norm"] = (df["rain"] - df["rain"].min()) / (
     df["rain"].max() - df["rain"].min()
 )
+
 # Calculate a combined color intensity based on both normalized temperature and rain
 df["color_intensity"] = df["temp_norm"] + df["rain_norm"]
 
-scatter = plt.scatter(
+scatter = ax4.scatter(
     x=df["tem"], y=df["rain"], c=df["color_intensity"], cmap="coolwarm", alpha=0.7
 )
-plt.colorbar(scatter, label="Color Intensity (Temp + Rain)")
+fig.colorbar(scatter, ax=ax4, label="Color Intensity (Temp + Rain)")
 
-plt.title("Scatter Plot of Rain vs Temperature with Color Intensity")
-plt.xlabel("Temperature (°C)")
-plt.ylabel("Rainfall (mm)")
+ax4.set_title("Scatter Plot of Rain vs Temperature with Color Intensity")
+ax4.set_xlabel("Temperature (°C)")
+ax4.set_ylabel("Rainfall (mm)")
 
+# Plot 2: Boxplot of Rainfall by Month
+ax5 = fig.add_subplot(grid_spec[1, 1])
+sns.boxplot(x="Month", y="rain", data=df, ax=ax5)
+ax5.set_title("Monthly Rainfall Distribution")
+ax5.set_xlabel("Month")
+ax5.set_ylabel("Rainfall (mm)")
+ax5.set_xticks(range(12))
+ax5.set_xticklabels(month_labels)
 
-# # 2. boxplot of rainfall by month
-# plt.figure(figsize=(12, 6))
-# sns.boxplot(x="Month", y="rain", data=df)
-# plt.title("Monthly Rainfall Distribution")
-# plt.xlabel("Month")
-# plt.ylabel("Rainfall (mm)")
-# plt.xticks(range(0, 12), labels=month_labels)
-# plt.show()
-
+plt.show()
 # # 3. plot temperature by month
 # plt.figure(figsize=(12, 6))
 # sns.boxplot(x="Month", y="tem", data=df)
