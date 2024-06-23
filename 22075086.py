@@ -36,7 +36,7 @@ fig.subplots_adjust(
     right=0.90,  # Padding from the right edge of the figure
     top=0.85,  # Padding from the top edge of the figure (adjusted to leave space for the title)
     bottom=0.05,  # Padding from the bottom edge of the figure
-    wspace=0.3,  # Width padding between subplots
+    wspace=0.1,  # Width padding between subplots
     hspace=0.3,  # Height padding between subplots
 )
 grid_spec = fig.add_gridspec(nrows=4, ncols=2)
@@ -94,33 +94,34 @@ ax3.set_title("Scatter Plot of Rain vs Temperature with Color Intensity")
 ax3.set_xlabel("Temperature (°C)")
 ax3.set_ylabel("Rainfall (mm)")
 
+# 4. plot yearly trend of temperature and rainfall
+ax4 = fig.add_subplot(grid_spec[2, 1])
+# Calculate the yearly average for temperature and rainfall
+yearly_summary = df.groupby("Year").agg({"tem": "mean", "rain": "mean"}).reset_index()
+
+# Rename columns for clarity
+yearly_summary = yearly_summary.rename(
+    columns={"tem": "Average Temperature (°C)", "rain": "Average Rainfall (mm)"}
+)
+
+sns.lineplot(
+    x="Year",
+    y="Average Temperature (°C)",
+    data=yearly_summary,
+    label="Average Temperature (°C)",
+    marker="o",
+)
+sns.lineplot(
+    x="Year",
+    y="Average Rainfall (mm)",
+    data=yearly_summary,
+    label="Average Rainfall (mm)",
+    marker="o",
+)
+
+ax4.set_title("Yearly Trend of Average Temperature and Rainfall")
+ax4.set_xlabel("Year")
+ax4.set_ylabel("Average Value")
+
+
 plt.show()
-# # 4. plot yearly trend of temperature and rainfall
-# # Calculate the yearly average for temperature and rainfall
-# yearly_summary = df.groupby("Year").agg({"tem": "mean", "rain": "mean"}).reset_index()
-
-# # Rename columns for clarity
-# yearly_summary = yearly_summary.rename(
-#     columns={"tem": "Average Temperature (°C)", "rain": "Average Rainfall (mm)"}
-# )
-# plt.figure(figsize=(14, 8))
-# sns.lineplot(
-#     x="Year",
-#     y="Average Temperature (°C)",
-#     data=yearly_summary,
-#     label="Average Temperature (°C)",
-#     marker="o",
-# )
-# sns.lineplot(
-#     x="Year",
-#     y="Average Rainfall (mm)",
-#     data=yearly_summary,
-#     label="Average Rainfall (mm)",
-#     marker="o",
-# )
-
-# plt.title("Yearly Trend of Average Temperature and Rainfall")
-# plt.xlabel("Year")
-# plt.ylabel("Average Value")
-# plt.legend(title="Metric")
-# plt.show()
