@@ -57,25 +57,25 @@ plt.axis("off")
 
 plt.show()
 
-# # 1. plot rain vs temp scatter plot
+# 1. plot rain vs temp scatter plot
 
-# # Normalize the data for better color scaling
-# df["temp_norm"] = (df["tem"] - df["tem"].min()) / (df["tem"].max() - df["tem"].min())
-# df["rain_norm"] = (df["rain"] - df["rain"].min()) / (
-#     df["rain"].max() - df["rain"].min()
-# )
-# # Calculate a combined color intensity based on both normalized temperature and rain
-# df["color_intensity"] = df["temp_norm"] + df["rain_norm"]
+ax4 = fig.add_subplot(grid_spec[1, 0])
+# Normalize the data for better color scaling
+df["temp_norm"] = (df["tem"] - df["tem"].min()) / (df["tem"].max() - df["tem"].min())
+df["rain_norm"] = (df["rain"] - df["rain"].min()) / (
+    df["rain"].max() - df["rain"].min()
+)
+# Calculate a combined color intensity based on both normalized temperature and rain
+df["color_intensity"] = df["temp_norm"] + df["rain_norm"]
 
-# scatter = plt.scatter(
-#     x=df["tem"], y=df["rain"], c=df["color_intensity"], cmap="coolwarm", alpha=0.7
-# )
-# plt.colorbar(scatter, label="Color Intensity (Temp + Rain)")
+scatter = plt.scatter(
+    x=df["tem"], y=df["rain"], c=df["color_intensity"], cmap="coolwarm", alpha=0.7
+)
+plt.colorbar(scatter, label="Color Intensity (Temp + Rain)")
 
-# plt.title("Scatter Plot of Rain vs Temperature with Color Intensity")
-# plt.xlabel("Temperature (°C)")
-# plt.ylabel("Rainfall (mm)")
-# # plt.show()
+plt.title("Scatter Plot of Rain vs Temperature with Color Intensity")
+plt.xlabel("Temperature (°C)")
+plt.ylabel("Rainfall (mm)")
 
 
 # # 2. boxplot of rainfall by month
