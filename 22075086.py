@@ -45,7 +45,7 @@ grid_spec = fig.add_gridspec(nrows=4, ncols=2)
 ax = fig.add_subplot(grid_spec[0, 0:2])
 plt.text(
     0.3,
-    0.9,
+    1,
     "Data Handling and Visualisation",
     fontsize=35,
     color="#0066cc",
@@ -124,4 +124,17 @@ ax4.set_xlabel("Year")
 ax4.set_ylabel("Average Value")
 
 
-plt.show()
+# Textblock for the summary
+ax5 = fig.add_subplot(grid_spec[3, 0:2])
+summary_text = (
+    "1. The boxplots show the distribution of rainfall and temperature by month.\n"
+    "2. The scatter plot shows the relationship between temperature and rainfall.\n"
+    "3. The color intensity is based on the normalized temperature and rainfall values.\n"
+    "4. The line plot shows the yearly trend of average temperature and rainfall."
+)
+ax5.text(0, 0.8, summary_text, fontsize=25, color="#333333", va="top")
+ax5.axis("off")  # Hide axes for the summary section
+
+
+plt.savefig("22075086.png", dpi=300, bbox_inches="tight", facecolor="#f4f4f4")
+# plt.show()
