@@ -126,12 +126,7 @@ ax4.set_ylabel("Average Value")
 
 # Textblock for the summary
 ax5 = fig.add_subplot(grid_spec[3, 0:2])
-summary_text = (
-    "1. The boxplots show the distribution of rainfall and temperature by month.\n"
-    "2. The scatter plot shows the relationship between temperature and rainfall.\n"
-    "3. The color intensity is based on the normalized temperature and rainfall values.\n"
-    "4. The line plot shows the yearly trend of average temperature and rainfall."
-)
+summary_text = "The inforphic provides an analytical study of rainfall and temperature in Bangladesh.\nBangladesh has a tropical monsoon climate, characterized by heavy seasonal rainfall, high temperatures,\nand high humidity. The data used in this study includes monthly rainfall and temperature values from \n1901 to 2023. The boxplots show the distribution of rainfall and temperature by month. \nThe scatter plot shows the relationship between temperature and rainfall. \nThe color intensity is based on the normalized temperature and rainfall values. \nThe line plot shows the yearly trend of average temperature and rainfall."
 ax5.text(0, 0.8, summary_text, fontsize=25, color="#333333", va="top")
 ax5.axis("off")  # Hide axes for the summary section
 
